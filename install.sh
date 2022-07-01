@@ -15,8 +15,8 @@ apt-get update -y > /dev/null 2>&1
 apt-get install cron curl unzip -y > /dev/null 2>&1
 echo -e "\n\033[1;36mINSTALANDO APACHE2 \033[1;33mESPERE...\033[0m"
 apt-get install apache2 -y > /dev/null 2>&1
-apt-get install php5 libapache2-mod-php5 php5-mcrypt -y > /dev/null 2>&1
-apt-get install php-ssh2 -y > /dev/null 2>&1
+apt-get install php5 libapache2-mod-php5 php5-mcrypt -y
+apt-get install php-ssh2 -y
 service apache2 restart > /dev/null 2>&1
 echo -e "\n\033[1;36mINSTALANDO MYSQL \033[1;33mESPERE...\033[0m"
 echo "debconf mysql-server/root_password password $senha" | debconf-set-selections
@@ -24,7 +24,7 @@ echo "debconf mysql-server/root_password_again password $senha" | debconf-set-se
 apt-get install mysql-server -y > /dev/null 2>&1
 mysql_install_db > /dev/null 2>&1
 (echo $senha; echo n; echo y; echo y; echo y; echo y)|mysql_secure_installation > /dev/null 2>&1
-echo -e "\n\033[1;36mGENERANDO CERTIFICADO SSL\033[1;33mESPERE...\033[0m"
+echo -e "\n\033[1;36mGENERANDO CERTIFICADO SSL \033[1;33mESPERE...\033[0m"
 sudo apt install certbot python3-certbot-apache -y > /dev/null 2>&1
 certbot --nginx --redirect --no-eff-email --email "$mail" -d "$domain"  > /dev/null 2>&1
 echo -e "\n\033[1;36mINSTALANDO PHPMYADMIN \033[1;33mESPERE...\033[0m"
@@ -112,4 +112,4 @@ echo -e "\033[1;36m CONTRASEÑA:\033[1;37m admin\033[0m"
 echo ""
 echo -e "\033[1;33m Al ingresar al panel combie la contraseña en >> Configuracion >> Contraseña Anterior: admin >> Nueva Contraseña: \033[0m"
 cat /dev/null > ~/.bash_history && history -c
-rm /root/install
+rm /root/install.sh
